@@ -1,0 +1,12 @@
+[Unit]
+After=network.target
+Description=Health_Buddy
+
+[Service]
+Type=simple
+WorkingDirectory=/root/test/
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
