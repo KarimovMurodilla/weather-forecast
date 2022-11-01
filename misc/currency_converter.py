@@ -23,20 +23,35 @@ class Currency:
 # print(cur.get_converted_currency('USD', 'ILS'))
 
 
-import json 
-
-import requests 
 
   
-# defining key/request url 
+class CryptoCurrency:
+    def __init__(self):
+        self.btc = None
+        self.eth = None
+    
 
-key = "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"
+    def create_link(self, name):
+        link = f"https://api.binance.com/api/v3/ticker/price?symbol={name}USDT"
+        return link
 
-  
-# requesting data from url 
+    
+    def get_response_data(self, key) -> dict:
+        data = requests.get(key)   
+        data = data.json()
 
-data = requests.get(key)   
+        return data
+    
 
-data = data.json() 
+    def get_btc(self):
+        key = self.create_link('BTC')
+        result = self.get_response_data(key)
 
-print(f"{data['symbol']} price is {data['price']}")
+        return result.get('price')
+    
+
+    def get_eth(self):
+        key = self.create_link('ETH')
+        result = self.get_response_data(key)
+
+        return result.get('price')
