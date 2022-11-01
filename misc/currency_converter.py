@@ -55,3 +55,16 @@ class CryptoCurrency:
         result = self.get_response_data(key)
 
         return result.get('price')
+    
+
+    def get_ton(self):
+        key = "https://coincodex.com/api/coincodex/get_coin/toncoin"
+        data = requests.get(key)   
+        data = data.json()
+
+        return round(data['today_open'], 3)
+
+
+c = CryptoCurrency()
+res = c.get_ton()
+print(res)
