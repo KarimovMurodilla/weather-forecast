@@ -3,7 +3,7 @@ import logging
 from aiogram import Bot, executor
 from aiogram.types import BotCommand
 
-from loader import bot
+from loader import bot, dp
 from weather_schedule import scheduler, schedule_jobs
 
 

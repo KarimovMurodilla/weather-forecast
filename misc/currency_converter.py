@@ -3,36 +3,26 @@ from bs4 import BeautifulSoup as bs
 
 
 class Currency:
-    def get_converted_currency(self, src, dest, amount=1):
-        content = requests.get(f"https://www.x-rates.com/table/?from={src}&amount={amount}").content
-        soup = bs(content, "html.parser")
-        exchange_tables = soup.find_all("table")
-        exchange_rates = {}
-        for exchange_table in exchange_tables:
-            for tr in exchange_table.find_all("tr"):
-                tds = tr.find_all("td")
-                if tds:
-                    currency = tds[0].text
-                    exchange_rate = float(tds[1].text)
-                    exchange_rates[currency] = exchange_rate        
-        
-        return exchange_rates[dest]
-
-
-# cur = Currency()
-# print(cur.get_converted_currency('USD', 'ILS'))
-
-
-
-  
-class CryptoCurrency:
     def __init__(self):
-        self.btc = None
-        self.eth = None
+        self.data= requests.get('https://api.exchangerate-api.com/v4/latest/USD').json()
+        self.currencies = self.data['rates']
     
 
+    def convert(self, from_currency, to_currency, amount = 1): 
+        initial_amount = amount 
+        #first convert it into USD if it is not in USD.
+        # because our base currency is USD
+        if from_currency != 'USD' : 
+            amount = amount / self.currencies[from_currency] 
+    
+        # limiting the precision to 4 decimal places 
+        amount = round(amount * self.currencies[to_currency], 4) 
+        return amount
+        
+  
+class CryptoCurrency:  
     def create_link(self, name):
-        link = f"https://api.binance.com/api/v3/ticker/price?symbol={name}USDT"
+        link = f"https://coincodex.com/api/coincodex/get_coin/{name}"
         return link
 
     
@@ -47,24 +37,22 @@ class CryptoCurrency:
         key = self.create_link('BTC')
         result = self.get_response_data(key)
 
-        return result.get('price')
+        return round(result['today_open'], 3)
     
 
     def get_eth(self):
         key = self.create_link('ETH')
         result = self.get_response_data(key)
 
-        return result.get('price')
+        return round(result['today_open'], 3)
     
 
     def get_ton(self):
         key = "https://coincodex.com/api/coincodex/get_coin/toncoin"
-        data = requests.get(key)   
-        data = data.json()
+        result = self.get_response_data(key)
 
-        return round(data['today_open'], 3)
+        return round(result['today_open'], 3)
 
 
-c = CryptoCurrency()
-res = c.get_ton()
-print(res)
+class CurrencyMixins(Currency, CryptoCurrency):
+    """This class inherits from classes that include the currencies and cryptocurrencies"""

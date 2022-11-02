@@ -1,4 +1,5 @@
 import requests, json
+from app.config import API_KEY
 
 
 class Owm:
@@ -45,11 +46,3 @@ class WeatherInfo(Owm):
         humidity = self.get_full_weather_info().get('main').get('humidity')
 
         return humidity
-
-
-owm = Owm('99eff4c6cb1811301dade125f4c3cd27')
-
-weather = owm.get_weather_info('Jerusalem')
-print(weather.celsius)
-print(weather.wind_speed)
-print(weather.humidity)
