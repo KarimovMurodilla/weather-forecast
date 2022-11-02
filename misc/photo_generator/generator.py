@@ -7,7 +7,7 @@ class PhotoGenerator:
         self.img_path = 'misc/photo_generator/img/israely.jpg'
         self.font_path = 'misc/photo_generator/fonts/arial.ttf'
         self.font_path2 = 'misc/photo_generator/fonts/calibri.ttf'
-        self.save_path = "misc/photo_generator/img/image_text.jpg"
+        self.saved_path = "misc/photo_generator/img/image_text.jpg"
     
 
     def get_photo_coords_for_weather(self):
@@ -89,7 +89,7 @@ class PhotoGenerator:
         return all_data
 
 
-    def put_weather_info_on_photo(self):
+    def put_all_info_on_photo(self):
         coords = self.get_photo_coords_for_weather()
         all_data = self.get_all_info_list()
 
@@ -104,4 +104,6 @@ class PhotoGenerator:
             for coord, win in zip(coords[1], all_data[1]):
                 d1.text((coord[0], coord[1]), str(win), font=myFont, fill=(255, 255, 255))
 
-            img.save(self.save_path)
+            img.save(self.saved_path)
+        
+        return self.saved_path
