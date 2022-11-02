@@ -77,7 +77,10 @@ class PhotoGenerator:
             winfo.append(weather.humidity)
         
         for c in curs:
-            res = cur.convert(c, "ILS")
+            if c == 'USD':
+                res = cur.convert(c, "ILS")
+            else:
+                res = cur.convert('ILS', c)
             currency_info.append(res)
 
         currency_info.append(cur.get_btc())

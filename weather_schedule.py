@@ -11,9 +11,9 @@ async def send_current_weather():
     image = pg.put_all_info_on_photo()
 
     with open(image, 'rb') as img:
-        await bot.send_photo(GROUP_ID, img)
+        await bot.send_photo(GROUP_ID, img, caption = "Text")
 
 
     
 def schedule_jobs():
-    scheduler.add_job(send_current_weather, 'interval', hours=1)
+    scheduler.add_job(send_current_weather, 'interval', minutes=1)

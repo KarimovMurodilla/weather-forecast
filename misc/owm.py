@@ -39,7 +39,7 @@ class WeatherInfo(Owm):
     def get_wind_speed(self):
         wind_speed = self.get_full_weather_info().get('wind').get('speed')
 
-        return wind_speed
+        return round(wind_speed)
 
 
     def get_humidity(self):
