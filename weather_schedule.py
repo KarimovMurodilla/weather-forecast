@@ -11,7 +11,13 @@ async def send_current_weather():
     image = pg.put_all_info_on_photo()
 
     with open(image, 'rb') as img:
-        await bot.send_photo(GROUP_ID, img, caption = "Text")
+        await bot.send_photo(
+            GROUP_ID, 
+            img, 
+            caption = "Дешевые авиабилеты, гостиницы и страховки"
+                      " в Израиле 🇮🇱 <a href='https://t.me/theisraely/21'>Подробности здесь</a>"
+        
+        )
 
 
     
