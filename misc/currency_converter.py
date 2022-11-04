@@ -16,7 +16,7 @@ class Currency:
             amount = amount / self.currencies[from_currency] 
     
         # limiting the precision to 4 decimal places 
-        amount = round(amount * self.currencies[to_currency], 4) 
+        amount = round(amount * self.currencies[to_currency], 2) 
         return amount
         
   
@@ -37,21 +37,21 @@ class CryptoCurrency:
         key = self.create_link('BTC')
         result = self.get_response_data(key)
 
-        return round(result['today_open'], 3)
+        return round(result['today_open'], 1)
     
 
     def get_eth(self):
         key = self.create_link('ETH')
         result = self.get_response_data(key)
 
-        return round(result['today_open'], 3)
+        return round(result['today_open'], 1)
     
 
     def get_ton(self):
         key = "https://coincodex.com/api/coincodex/get_coin/toncoin"
         result = self.get_response_data(key)
 
-        return round(result['today_open'], 3)
+        return round(result['today_open'], 1)
 
 
 class CurrencyMixins(Currency, CryptoCurrency):
