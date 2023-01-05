@@ -1,4 +1,4 @@
-# from misc.currency_converter import CurrencyMixins
+from misc.currency_converter import CurrencyMixins
 # from misc.owm import Owm
 # from misc.photo_generator.generator import PhotoGenerator
 # from app.config import API_KEY
@@ -12,10 +12,10 @@
 
 
 # Currency
-# cur = CurrencyMixins()
-# print(cur.get_btc())
-# print(cur.get_eth())
-# print(cur.get_ton())
+cur = CurrencyMixins()
+print(cur.get_btc())
+print(cur.get_eth())
+print(cur.get_ton())
 # curs = [
 #     "USD",
 #     "RUB",

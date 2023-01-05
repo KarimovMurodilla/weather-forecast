@@ -3,20 +3,16 @@ from bs4 import BeautifulSoup as bs
 
 
 class Currency:
-    def __init__(self):
-        self.data= requests.get('https://api.exchangerate-api.com/v4/latest/USD').json()
-        self.currencies = self.data['rates']
-    
-
     def convert(self, from_currency, to_currency, amount = 1): 
-        initial_amount = amount 
+        data = requests.get('https://api.exchangerate-api.com/v4/latest/USD').json() 
+        currencies = data['rates']
         #first convert it into USD if it is not in USD.
         # because our base currency is USD
         if from_currency != 'USD' : 
-            amount = amount / self.currencies[from_currency] 
+            amount = amount / currencies[from_currency] 
     
         # limiting the precision to 4 decimal places 
-        amount = round(amount * self.currencies[to_currency], 2) 
+        amount = round(amount * currencies[to_currency], 2) 
         return amount
         
   
