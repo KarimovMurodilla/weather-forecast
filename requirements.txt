@@ -1,3 +1,3 @@
-aiogram == 2.18
-apsheduler == 3.8.1
-sqlalchemy == 1.4.35
+aiogram==2.18
+apsheduler==3.8.1
+sqlalchemy==1.4.35
