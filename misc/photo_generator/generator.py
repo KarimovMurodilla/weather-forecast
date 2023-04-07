@@ -1,4 +1,3 @@
-from locale import currency
 from PIL import Image, ImageDraw, ImageFont
 from loader import owm, cur
 
