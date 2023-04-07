@@ -2,3 +2,4 @@ aiogram==2.18
 APScheduler==3.9.1
 sqlalchemy==1.4.35
 environs==9.5.0
+requests==2.28.1
