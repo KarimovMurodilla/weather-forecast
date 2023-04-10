@@ -12,7 +12,7 @@ pg = PhotoGenerator()
 
 
 async def send_current_weather():
-    image = pg.put_all_info_on_photo()
+    image = await pg.put_all_info_on_photo()
 
     with open(image, 'rb') as img:
         await bot.send_photo(
@@ -26,6 +26,6 @@ async def send_current_weather():
 
     
 def schedule_jobs():
-    scheduler.add_job(send_current_weather, trigger='cron', hour='14', minute='20', timezone=pytz.timezone('Israel'))
+    scheduler.add_job(send_current_weather, trigger='cron', hour='19', minute='37', timezone=pytz.timezone('Israel'))
     # scheduler.add_job(send_current_weather, trigger='cron', hour='15', timezone=pytz.timezone('Israel'))
     # scheduler.add_job(send_current_weather, trigger='cron', hour='19', timezone=pytz.timezone('Israel'))
