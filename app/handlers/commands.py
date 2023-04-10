@@ -13,7 +13,7 @@ pg = PhotoGenerator()
 async def cmd_start(message: types.Message, state: FSMContext):
     await message.answer(f"Привет {message.from_user.first_name}!")
 
-    image = pg.put_all_info_on_photo()
+    image = await pg.put_all_info_on_photo()
 
     with open(image, 'rb') as img:
         await bot.send_photo(

@@ -9,7 +9,7 @@ class PhotoGenerator:
         self.saved_path = "misc/photo_generator/img/image_text.jpg"
     
 
-    def get_photo_coords_for_weather(self):
+    async def get_photo_coords_for_weather(self):
         # Weather
         weather = [
             (1497, 1140), (2300, 1140), (3160, 1140),
@@ -38,7 +38,7 @@ class PhotoGenerator:
         return coords
     
 
-    def get_places(self):
+    async def get_places(self):
         places = [
             'Tel-Aviv', 
             'Jerusalem', 
@@ -53,7 +53,7 @@ class PhotoGenerator:
         return places
     
 
-    def get_list_currency(self):
+    async def get_list_currency(self):
         curs = [
             "USD",
             "RUB",
@@ -62,38 +62,38 @@ class PhotoGenerator:
         return curs
     
 
-    def get_all_info_list(self):
-        places = self.get_places()
-        curs = self.get_list_currency()
+    async def get_all_info_list(self):
+        places = await self.get_places()
+        curs = await self.get_list_currency()
         winfo = []
 
         currency_info = []
         
         for p in places:
-            weather = owm.get_weather_info(p)
+            weather = await owm.get_weather_info(p)
             winfo.append(weather.celsius)
             winfo.append(weather.wind_speed)
             winfo.append(weather.humidity)
         
         for c in curs:
             if c == 'USD':
-                res = cur.convert(c, "ILS")
+                res = await cur.convert(c, "ILS")
             else:
-                res = cur.convert('ILS', c)
+                res = await cur.convert('ILS', c)
             currency_info.append(res)
 
-        currency_info.append(cur.get_btc())
-        currency_info.append(cur.get_eth())
-        currency_info.append(cur.get_ton())
+        currency_info.append(await cur.get_btc())
+        currency_info.append(await cur.get_eth())
+        currency_info.append(await cur.get_ton())
 
         all_data = [winfo, currency_info]
 
         return all_data
 
 
-    def put_all_info_on_photo(self):
-        coords = self.get_photo_coords_for_weather()
-        all_data = self.get_all_info_list()
+    async def put_all_info_on_photo(self):
+        coords = await self.get_photo_coords_for_weather()
+        all_data = await self.get_all_info_list()
 
         with Image.open(self.img_path) as img:
             d1 = ImageDraw.Draw(img)
