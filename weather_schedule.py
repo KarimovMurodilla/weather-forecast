@@ -1,7 +1,14 @@
 import pytz
 
 from app.config import GROUP_ID
-from loader import bot, pg, scheduler
+from loader import bot, scheduler
+from misc.photo_generator.generator import PhotoGenerator
+
+
+
+
+# Photo generator class
+pg = PhotoGenerator()
 
 
 async def send_current_weather():
