@@ -12,7 +12,7 @@ pg = PhotoGenerator()
 
 
 async def send_current_weather():
-    image = pg.put_all_info_on_photo()
+    image = await pg.put_all_info_on_photo()
 
     with open(image, 'rb') as img:
         await bot.send_photo(
