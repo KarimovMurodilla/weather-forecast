@@ -25,7 +25,7 @@ async def cmd_start(message: types.Message, state: FSMContext):
     #     )
     res = await owm.get_weather_info('Tel-Aviv')
     print(res)
-    await message.answer(res)
+    await message.answer(res.celsius)
     
 
 def register_cmd_handlers(dp: Dispatcher):
