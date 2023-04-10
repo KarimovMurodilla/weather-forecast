@@ -1,7 +1,7 @@
 from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 
-from loader import bot
+from loader import bot, owm
 from app.config import GROUP_ID
 
 from misc.photo_generator.generator import PhotoGenerator
@@ -15,15 +15,17 @@ async def cmd_start(message: types.Message, state: FSMContext):
 
     image = await pg.put_all_info_on_photo()
 
-    with open(image, 'rb') as img:
-        await bot.send_photo(
-            message.chat.id, 
-            img, 
-            caption = "Дешевые авиабилеты, гостиницы и страховки"
-                      " в Израиле 🇮🇱 <a href='https://t.me/theisraely/21'>Подробности здесь</a>"
+    # with open(image, 'rb') as img:
+    #     await bot.send_photo(
+    #         message.chat.id, 
+    #         img, 
+    #         caption = "Дешевые авиабилеты, гостиницы и страховки"
+    #                   " в Израиле 🇮🇱 <a href='https://t.me/theisraely/21'>Подробности здесь</a>"
         
-        )
-
+    #     )
+    res = await owm.get_weather_info('Tel-Aviv')
+    print(res)
+    await message.answer(res)
     
 
 def register_cmd_handlers(dp: Dispatcher):
