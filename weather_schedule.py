@@ -1,13 +1,8 @@
 import pytz
 
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from app.config import GROUP_ID
+from loader import bot, pg, scheduler
 
-from loader import bot
-from misc.photo_generator.generator import PhotoGenerator
-
-scheduler = AsyncIOScheduler()
-pg = PhotoGenerator()
 
 async def send_current_weather():
     image = pg.put_all_info_on_photo()

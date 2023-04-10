@@ -1,8 +1,11 @@
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+
 from misc.owm import Owm
 from misc.currency_converter import CurrencyMixins
+from misc.photo_generator.generator import PhotoGenerator
 from app.config import BOT_TOKEN, API_KEY
 
 
@@ -18,3 +21,10 @@ owm = Owm(API_KEY)
 
 # Currencies and Cryptocurrency
 cur = CurrencyMixins()
+
+# Photo generator class
+pg = PhotoGenerator()
+
+
+# Apscheduler
+scheduler = AsyncIOScheduler()
