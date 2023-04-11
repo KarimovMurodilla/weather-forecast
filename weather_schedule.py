@@ -26,6 +26,6 @@ async def send_current_weather():
 
     
 def schedule_jobs():
-    scheduler.add_job(send_current_weather, trigger='cron', hour='10', timezone=pytz.timezone('Israel'))
+    scheduler.add_job(send_current_weather, trigger='cron', hour='11', timezone=pytz.timezone('Israel'))
     # scheduler.add_job(send_current_weather, trigger='cron', hour='15', timezone=pytz.timezone('Israel'))
     # scheduler.add_job(send_current_weather, trigger='cron', hour='19', timezone=pytz.timezone('Israel'))
